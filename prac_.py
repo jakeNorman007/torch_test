@@ -4,26 +4,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 # print(torch.__version__)
 
-x = torch.rand(5,3)
-y = torch.tensor([7, 7])
-print(y.ndim)
-print(y.shape)
+# Tenosrs and Matrix are usually named in CAPS i.e TENSOR, MATRIX
 
-MATRIX = torch.tensor([[7, 7], [9, 10]])
+# X = torch.rand(3, 4)
 
-print(MATRIX)
-print(MATRIX.ndim)
-print(MATRIX.shape)
+# # print(X.ndim) # 2 in this case. number of dimensions can be determined by the number of indexes in the random tensor we created
 
-TENSOR = torch.tensor([[[4, 6, 2], [5, 9, 1], [9, 8, 7]]])
+# # Creating a random tensor with a simillar shape to an image tensor
+# # name = torch.rand(size=(heigh, width, color channels(Red, Green, Blue)))
 
-print(TENSOR)
-print(TENSOR.ndim)
-print(TENSOR.shape)
+# IMG_TENSOR = torch.rand(size=(224, 224, 3))
+# print(IMG_TENSOR.shape, IMG_TENSOR.ndim)
 
-z = torch.randn(7, 7)
-print(z)
-print(z.ndim)
-print(z.shape)
+# ZEROS AND ONES
 
-#1:35:09 - time stamp for the course video
+MATRIX = torch.tensor([[1, 2, 3], [3, 1, 2]])
+MATRIX_2 = torch.tensor([[1, 3], [1, 1], [4, 5]])
+
+print(MATRIX @ MATRIX_2)
+
+#2:34:50 - time stamp for the course video
