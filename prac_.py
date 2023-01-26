@@ -16,7 +16,6 @@ import matplotlib.pyplot as plt
 # IMG_TENSOR = torch.rand(size=(224, 224, 3))
 # print(IMG_TENSOR.shape, IMG_TENSOR.ndim)
 
-# ZEROS AND ONES
 
 MATRIX = torch.tensor([[1, 2, 3], [3, 1, 2]])
 MATRIX_2 = torch.tensor([[1, 3], [1, 1], [4, 5]])
