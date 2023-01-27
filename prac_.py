@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt # for visualization
 - saving and loading a model
 - finally, put it all together
 
--- video time stamp 
+-- video time stamp 4:52:49
 
 -- notes, research links etc. --
 
@@ -59,5 +59,15 @@ def plot_predictions(train_data=X_train, train_labels=y_train,
     plt.scatter(test_data, predictions, c='r', s=4, label="Predictions")
     
   plt.legend(prop={"size": 14})
+  plot_predictions()
   
-plot_predictions
+# First model build (Linear regression model)
+  
+class LinearRegressionModel(nn.Module): # almost everything in PT inherhits from nn.Module
+  def __init__(self):
+    super().__init__()
+    self.weights, self.bias = nn.parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
+    
+  #forward method to define computation in the model
+  def forward(self, x: torch.Tensor) -> torch.Tensor: # x is the input data, which is tensor, needs to return tensor
+    return self.weights * x + self.bias
