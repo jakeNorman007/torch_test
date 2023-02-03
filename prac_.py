@@ -65,8 +65,13 @@ plot_predictions()
 class LinearRegressionModel(nn.Module): # almost everything in PT inherhits from nn.Module
   def __init__(self):
     super().__init__()
-    self.weights, self.bias = nn.parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
+    self.weights = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
+    self.bias = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
     
   #forward method to define computation in the model
   def forward(self, x: torch.Tensor) -> torch.Tensor: # x is the input data, which is tensor, needs to return tensor
     return self.weights * x + self.bias
+
+torch.manual_seed(42)
+model_0 = LinearRegressionModel()
+print(list(model_0.parameters()))
