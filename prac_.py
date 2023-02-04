@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt # for visualization
 - saving and loading a model
 - finally, put it all together
 
--- video time stamp 5:13:13
+-- video time stamp 
 
 -- notes, research links etc. --
 
@@ -41,7 +41,7 @@ train_split = int(0.8 * len(X)) # creates a training split of 80/ 20 in our data
 X_train, y_train = X[:train_split], y[:train_split] # trains on 80% of the data
 X_test, y_test = X[train_split:], y[train_split:] # tests on 20% of the data
 
-print(len(X_train), len(y_train), len(X_test), len(y_test))
+len(X_train), len(y_train), len(X_test), len(y_test)
 
 def plot_predictions(train_data=X_train, train_labels=y_train, 
                      test_data=X_test, test_labels=y_test, 
@@ -74,4 +74,45 @@ class LinearRegressionModel(nn.Module): # almost everything in PT inherhits from
 
 torch.manual_seed(42)
 model_0 = LinearRegressionModel()
-print(list(model_0.parameters()))
+list(model_0.parameters())
+
+with torch.inference_mode():
+   y_pred = model_0(X_test)
+
+# loss function, measures how poor the models predictions are compared to the ideal outputs
+# Optimizer: takes into account the loss of a model, adjusts the Parameters (e.g. weight and bias) to improve the loss function. Specifically, need a training and testing loop.
+
+#Loss Function
+loss_fn = nn.L1Loss()
+
+# Optimizer, lr = learning rate
+optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.01)
+
+# training loop and testing loop
+
+"""
+training loop: 1. loop through the data, 2. forward pass to make predictions(involves data moving through the forward functions) - also called forward propagation, 3. calculate loss(compare forward pass predictions to ground truth labels), 4. optimize zero grad, 5. loss backwards, moves backwards through network layers to calculate the gradients of each parameter with respect to the loss, 6. optimizer step - use the optimizer to adjust our models parameter to try and improve loss
+"""
+
+# an epoch is one loop through the data
+# pytorch training loop song
+torch.manual_seed(42)
+epochs = 100
+
+for epoch in range(epochs):
+  model_0.train()
+  y_pred = model_0(X_train)
+  loss = loss_fn(y_pred, y_train)
+  # print(f"Loss: {loss}")
+  optimizer.zero_grad()
+  loss.backward()
+  optimizer.step()
+  
+  # testing loop
+  model_0.eval() # turns off gradient tracking
+  with torch.inference_mode():
+    test_pred = model_0(X_test)
+    test_loss = loss_fn(test_pred, y_test)
+    if epoch % 10 == 0:
+      print(f"Epoch: {epoch} | Loss: {loss} | Test Loss: {test_loss}")
+      print(model_0.state_dict())
