@@ -1,6 +1,7 @@
 import torch
 from torch import nn # contains all the PT building blocks for neural networks (nn)
 import matplotlib.pyplot as plt # for visualization
+import numpy as np
 
 '''
 01 - basic Pytorch workflow
@@ -128,6 +129,4 @@ for epoch in range(epochs):
   with torch.inference_mode():
     y_preds_new = model_0(X_test)
   print(model_0.state_dict())
-print(epoch_count)
-print(loss_values)
-print(test_loss_values)
+print(epoch_count, np.array(torch.tensor(loss_values).cpu().numpy()))
