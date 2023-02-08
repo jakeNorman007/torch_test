@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt # for visualization
 - saving and loading a model
 - finally, put it all together
 
--- video time stamp 
+-- video time stamp 7:00:43 (section 50)
 
 -- notes, research links etc. --
 
@@ -97,7 +97,12 @@ training loop: 1. loop through the data, 2. forward pass to make predictions(inv
 # an epoch is one loop through the data
 # pytorch training loop song
 torch.manual_seed(42)
-epochs = 100
+epochs = 200
+
+# track model values and progress
+epoch_count = []
+loss_values = []
+test_loss_values = []
 
 for epoch in range(epochs):
   model_0.train()
@@ -114,5 +119,15 @@ for epoch in range(epochs):
     test_pred = model_0(X_test)
     test_loss = loss_fn(test_pred, y_test)
     if epoch % 10 == 0:
+      epoch_count.append(epoch)
+      loss_values.append(loss)
+      test_loss_values.append(test_loss)
       print(f"Epoch: {epoch} | Loss: {loss} | Test Loss: {test_loss}")
       print(model_0.state_dict())
+
+  with torch.inference_mode():
+    y_preds_new = model_0(X_test)
+  print(model_0.state_dict())
+print(epoch_count)
+print(loss_values)
+print(test_loss_values)
