@@ -13,7 +13,7 @@ import numpy as np
 - saving and loading a model
 - finally, put it all together
 
--- video time stamp 7:00:43 (section 50)
+-- video time stamp 8:31:37 (section 60)
 
 -- notes, research links etc. --
 
@@ -129,4 +129,3 @@ for epoch in range(epochs):
   with torch.inference_mode():
     y_preds_new = model_0(X_test)
   print(model_0.state_dict())
-print(epoch_count, np.array(torch.tensor(loss_values).cpu().numpy()))
