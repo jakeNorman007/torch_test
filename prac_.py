@@ -4,21 +4,9 @@ import matplotlib.pyplot as plt # for visualization
 import numpy as np
 
 '''
-01 - basic Pytorch workflow
-
-- data, prepare and load data
-- build a simple model
-- fitting the model to the data we load (training)
-- make predictions and evaluate them (Inference)
-- saving and loading a model
-- finally, put it all together
-
 -- video time stamp 8:31:37 (section 60)
 
--- notes, research links etc. --
-
 - linear regression formula (Y = a + bX), where X is the explanatory variable and Y is the dependent variable. The slope of the line (b), the intercept of the line (a) -> the value of y when x = 0
-
 '''
 
 # using linear regression to make a straight line using known data
@@ -96,7 +84,6 @@ training loop: 1. loop through the data, 2. forward pass to make predictions(inv
 """
 
 # an epoch is one loop through the data
-# pytorch training loop song
 torch.manual_seed(42)
 epochs = 200
 
