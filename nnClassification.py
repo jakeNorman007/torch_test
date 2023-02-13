@@ -31,11 +31,11 @@ model_0 = CircleModelV0().to(device)
 #model_0 = nn.Sequential(nn.Linear(in_features=2, out_features=5),nn.Linear(in_features=5, out_features=1)).to(device)
 
 with torch.inference_mode():
-  untrained_pred = model_0(X_test.to(device))
-print(f"Predictions length: {len(untrained_pred)} | Shape: {untrained_pred.shape}")
+  untrained_predictions = model_0(X_test.to(device))
+print(f"Predictions length: {len(untrained_predictions)} | Shape: {untrained_predictions.shape}")
 
 loss_fn = nn.BCEWithLogitsLoss()# sigmoid activation function built in
-optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.1)
+opt = torch.optim.SGD(params=model_0.parameters(), lr=0.1)
 
 #calculating for accuracy
 def accuracy_fn(y_true, y_pred):
@@ -47,11 +47,11 @@ model_0.eval()
 with torch.inference_mode():
   y_logits = model_0(X_test.to(device))[:5]
 
-y_pred_probs = torch.sigmoid(y_logits)
-y_preds = torch.round(y_pred_probs)
-y_preds_labels = torch.round(torch.sigmoid(model_0(X_test.to(device))[:5]))
-print(torch.eq(y_preds.squeeze(), y_preds_labels.squeeze()))
-y_preds.squeeze()
+y_prediction_probs = torch.sigmoid(y_logits)
+y_predictions = torch.round(y_prediction_probs)
+y_prediction_labels = torch.round(torch.sigmoid(model_0(X_test.to(device))[:5]))
+print(torch.eq(y_predictions.squeeze(), y_prediction_labels.squeeze()))
+y_predictions.squeeze()
 
 torch.manual_seed(42)
 epochs = 100
@@ -64,6 +64,6 @@ for epoch in range(epochs):
   y_preds = torch.round(torch.sigmoid(y_logits))
   loss = loss_fn(y_logits, y_train)
   acc = accuracy_fn(y_true=y_train, y_pred=y_preds)
-  optimizer.zero_grad()
+  opt.zero_grad()
   loss.backward()
-  optimizer.step()
+  opt.step()
