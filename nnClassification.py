@@ -63,7 +63,7 @@ for epoch in range(epochs):
   y_logtis = model_0(X_train).squeeze()
   y_predictions = torch.round(torch.sigmoid(y_logits))
   loss = loss_fn(y_logits, y_train)
-  acc = accuracy_fn(y_true=y_train, y_pred=y_preds)
+  acc = accuracy_fn(y_true=y_train, y_pred=y_predictions)
   opt.zero_grad()
   loss.backward()
   opt.step()
