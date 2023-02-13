@@ -61,7 +61,7 @@ X_test, y_test = X_test.to(device), y_test.to(device)
 for epoch in range(epochs):
   model_0.train()
   y_logtis = model_0(X_train).squeeze()
-  y_preds = torch.round(torch.sigmoid(y_logits))
+  y_predictions = torch.round(torch.sigmoid(y_logits))
   loss = loss_fn(y_logits, y_train)
   acc = accuracy_fn(y_true=y_train, y_pred=y_preds)
   opt.zero_grad()
